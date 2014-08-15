@@ -2,7 +2,7 @@
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DERIVED_DATA_PATH=$BASE_DIR/derivedDataPath
 BUILD_DIR=$DERIVED_DATA_PATH/Build
-FRAMEWORK_BUILD_DIR=$BUILD_DIR/framework
+FRAMEWORK_BUILD_DIR=$BASE_DIR/Frameworks
 
 function build {
    xcodebuild -workspace 'sdk.xcworkspace' -scheme $1 \
@@ -70,7 +70,7 @@ function framework_pod {
    copy_pod_headers $1 
 }
 
-rm -rf $DERIVED_DATA_PATH
+rm -rf $DERIVED_DATA_PATH $FRAMEWORK_BUILD_DIR
 
 pod install
 python fix_pod_install.py
@@ -85,6 +85,5 @@ framework_pod AFNetworking
 framework_pod CocoaLumberjack
 framework_pod JSONKit-NoWarning
 
-cd $BASE_DIR
-python fix_imports.py $FRAMEWORK_BUILD_DIR/CubieSDK.framework/Versions/A/Headers \
-   AFNetworking CocoaLumberjack CocoaLumberjack
+python $BASE_DIR/fix_imports.py $FRAMEWORK_BUILD_DIR/CubieSDK.framework/Versions/A/Headers \
+   AFNetworking CocoaLumberjack JSONKit-NoWarning

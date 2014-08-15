@@ -46,7 +46,8 @@
       @"button_text" : [CBMssageRequest trimToNull:self.cubieMessage.buttonText],
       @"button_android_execute_param" : [CBMssageRequest trimToNull:self.cubieMessage.buttonAndroidExecuteParam],
       @"button_android_market_param" : [CBMssageRequest trimToNull:self.cubieMessage.buttonAndroidMarketParam],
-      @"button_ios_execute_param" : [CBMssageRequest trimToNull:self.cubieMessage.buttonIosExecuteParam]
+      @"button_ios_execute_param" : [CBMssageRequest trimToNull:self.cubieMessage.buttonIosExecuteParam],
+      @"notification" : [CBMssageRequest trimToNull:self.cubieMessage.notification]
     };
     return [dictionary JSONString];
 }

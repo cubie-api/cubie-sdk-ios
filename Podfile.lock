@@ -20,21 +20,21 @@ PODS:
   - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - CocoaLumberjack (1.9.1):
+  - CocoaLumberjack (1.9.2):
     - CocoaLumberjack/Extensions
-  - CocoaLumberjack/Core (1.9.1)
-  - CocoaLumberjack/Extensions (1.9.1):
+  - CocoaLumberjack/Core (1.9.2)
+  - CocoaLumberjack/Extensions (1.9.2):
     - CocoaLumberjack/Core
   - JSONKit-NoWarning (1.2)
 
 DEPENDENCIES:
-  - AFNetworking
-  - CocoaLumberjack
-  - JSONKit-NoWarning
+  - AFNetworking (~> 2.3.1)
+  - CocoaLumberjack (~> 1.9.2)
+  - JSONKit-NoWarning (~> 1.2)
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  CocoaLumberjack: 94accd5749f5c5d15134c8d50f34a973aed8ef69
+  CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   JSONKit-NoWarning: fc8d6dd8ec65e303867d1bd274632fc60a4a8ab9
 
 COCOAPODS: 0.33.1

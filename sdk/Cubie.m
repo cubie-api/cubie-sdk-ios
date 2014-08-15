@@ -1,10 +1,11 @@
+#import <UIKit/UIKit.h>
 #import "Cubie.h"
 #import "CBPref.h"
 #import "NSURL+CB.h"
 #import "NSDictionary+CB.h"
 #import "CBAccessToken.h"
 #import "CBSession.h"
-
+#import "UIImage+CB.h"
 
 @implementation Cubie
 
@@ -71,6 +72,32 @@
         return YES;
     }
     return NO;
+}
+
++ (UIButton*) buttonWithCubieStyle
+{
+    UIButton* connectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    NSString* pathForCBResources = [[NSBundle mainBundle] pathForResource:@"CBResources" ofType:@"bundle"];
+    NSBundle* CBResources = [NSBundle bundleWithPath:pathForCBResources];
+    [connectButton setTitle:[CBResources localizedStringForKey:@"connect_with_cubie" value:@"Connect with Cubie"
+                                                         table:nil]
+                   forState:UIControlStateNormal];
+    [connectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [connectButton setImage:[UIImage imageWithContentsOfFile:[CBResources pathForResource:@"cubie_icon" ofType:@"png"]]
+                   forState:UIControlStateNormal];
+    [connectButton setImage:[UIImage imageWithContentsOfFile:[CBResources pathForResource:@"cubie_icon" ofType:@"png"]]
+                   forState:UIControlStateHighlighted];
+    [connectButton setBackgroundImage:[UIImage stretchableImageWithColor:[UIColor colorWithRed:0.153 green:0.725
+                                                                                          blue:0.698 alpha:1]]
+                             forState:UIControlStateNormal];
+    [connectButton setBackgroundImage:[UIImage stretchableImageWithColor:[UIColor colorWithRed:0.176 green:0.831
+                                                                                          blue:0.8 alpha:1]]
+                             forState:UIControlStateHighlighted];
+    [connectButton sizeToFit];
+    connectButton.bounds = CGRectMake(connectButton.bounds.origin.x, connectButton.bounds.origin.y, connectButton.bounds.size.width + 12, connectButton.bounds.size.height + 12);
+    connectButton.layer.masksToBounds = YES;
+    connectButton.layer.cornerRadius = 5;
+    return connectButton;
 }
 
 @end

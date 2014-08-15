@@ -1,7 +1,6 @@
 #import "CBService.h"
 #import "CBUser.h"
 #import "AFHTTPRequestOperation.h"
-#import "AFURLRequestSerialization.h"
 #import "CBUserAccessToken.h"
 #import "CBFriendList.h"
 #import "CBFriend.h"
@@ -52,7 +51,7 @@ NSTimeInterval CBRequestTimeoutInterval = 10;
 }
 
 
-+ (void) requestProfile:(void (^)(CBUser* cubieUser, NSError* error)) done
++ (void) requestMe:(void (^)(CBUser* cubieUser, NSError* error)) done
 {
     NSString* url = [NSString stringWithFormat:@"%@%@", EndPoint, @"/v1/api/user/me"];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -143,13 +142,13 @@ NSTimeInterval CBRequestTimeoutInterval = 10;
     [[NSOperationQueue mainQueue] addOperation:requestOperation];
 }
 
-+ (void) createTransactionWithPurchaseId:(NSString*) purchaseId
-                                itemName:(NSString*) itemName
-                                currency:(NSString*) currency
-                                   price:(NSDecimalNumber*) price
-                            purchaseDate:(NSDate*) purchaseDate
-                                   extra:(NSDictionary*) extra
-                                    done:(void (^)(NSError* error)) done
++ (void) createTransaction:(NSString*) purchaseId
+                  itemName:(NSString*) itemName
+                  currency:(NSString*) currency
+                     price:(NSDecimalNumber*) price
+              purchaseDate:(NSDate*) purchaseDate
+                     extra:(NSDictionary*) extra
+                      done:(void (^)(NSError* error)) done
 {
     CBTransactionRequest* cubieTransactionRequest = [CBTransactionRequest create:purchaseId
                                                                         itemName:itemName

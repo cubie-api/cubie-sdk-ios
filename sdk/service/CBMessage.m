@@ -15,6 +15,7 @@
     buttonAndroidExecuteParam:(NSString*) buttonAndroidExecuteParam
      buttonAndroidMarketParam:(NSString*) buttonAndroidMarketParam
         buttonIosExecuteParam:(NSString*) buttonIosExecuteParam
+                 notification:(NSString*) notification
 {
     self = [super init];
     if (self)
@@ -31,6 +32,7 @@
         _buttonIosExecuteParam = buttonIosExecuteParam;
         _imageWidth = imageWidth;
         _imageHeight = imageHeight;
+        _notification = notification;
     }
 
     return self;
@@ -48,6 +50,7 @@
        buttonAndroidExecuteParam:(NSString*) buttonAndroidExecuteParam
         buttonAndroidMarketParam:(NSString*) buttonAndroidMarketParam
            buttonIosExecuteParam:(NSString*) buttonIosExecuteParam
+                    notification:(NSString*) notification
 {
     return [[self alloc] initWithText:text
                              imageUrl:imageUrl
@@ -60,7 +63,8 @@
                            buttonText:buttonText
             buttonAndroidExecuteParam:buttonAndroidExecuteParam
              buttonAndroidMarketParam:buttonAndroidMarketParam
-                buttonIosExecuteParam:buttonIosExecuteParam];
+                buttonIosExecuteParam:buttonIosExecuteParam
+                         notification:notification];
 }
 
 - (NSString*) description
@@ -78,6 +82,7 @@
     [description appendFormat:@", buttonAndroidExecuteParam=%@", self.buttonAndroidExecuteParam];
     [description appendFormat:@", buttonAndroidMarketParam=%@", self.buttonAndroidMarketParam];
     [description appendFormat:@", buttonIosExecuteParam=%@", self.buttonIosExecuteParam];
+    [description appendFormat:@", notification=%@", self.notification];
     [description appendString:@">"];
     return description;
 }
@@ -89,10 +94,10 @@
 
 - (BOOL) isEmpty
 {
-    return [CBMessage isBlank:self.linkText]
-      && [CBMessage isBlank:self.buttonText]
-      && [CBMessage isBlank:self.text]
-      && [CBMessage isBlank:self.imageUrl];
-
+    return [CBMessage isBlank:self.notification] ||
+      ([CBMessage isBlank:self.linkText]
+        && [CBMessage isBlank:self.buttonText]
+        && [CBMessage isBlank:self.text]
+        && [CBMessage isBlank:self.imageUrl]);
 }
 @end

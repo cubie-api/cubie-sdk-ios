@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DA0DF705A6440B08F67AF32 /* PBXBuildFile */ = {isa = PBXBuildFile; fileRef = 411E805231FD4FB3BBC7462A /* libPods.a */; };
 		1A294045DB3475D0994DAD78 /* CBMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A294DB59D53F5D7CA7E2404 /* CBMessageBuilder.m */; };
+		1A29408E04FE0D98CB15FBA8 /* UIViewController+CBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2941C5053E5CB030D4377B /* UIViewController+CBSession.m */; };
 		1A2943116DFC23F7F316B825 /* CBServiceError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A294BBBD5089307707059EE /* CBServiceError.m */; };
 		1A29437CBB9EC5E6D8700ECD /* CBAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2943C74E51B6023A89A1B2 /* CBAccessToken.m */; };
 		1A29460FCA2ACA05CA449F03 /* CBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A294670857E427C56E91DF2 /* CBMessage.m */; };
@@ -33,6 +35,7 @@
 		2896D896198747C200A8DCCC /* NSURL+CB.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896D886198747C200A8DCCC /* NSURL+CB.m */; };
 		2896D897198747C200A8DCCC /* CBPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896D888198747C200A8DCCC /* CBPref.m */; };
 		2896D899198747FA00A8DCCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2896D898198747FA00A8DCCC /* UIKit.framework */; };
+		4AB59545199CA6DD003FB66E /* UIImage+CB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB59544199CA6DD003FB66E /* UIImage+CB.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,9 +61,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A2940022485C63B82BCC29F /* UIViewController+CBSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CBSession.h"; sourceTree = "<group>"; };
 		1A294026536D427218FF54DC /* CBMessageIsEmptyError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMessageIsEmptyError.m; sourceTree = "<group>"; };
 		1A2940DC9E2CB0BB6EDA34C3 /* CBAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBAccessToken.h; sourceTree = "<group>"; };
 		1A29413C519E34C17A095BD6 /* CBServiceError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBServiceError.h; sourceTree = "<group>"; };
+		1A2941C5053E5CB030D4377B /* UIViewController+CBSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CBSession.m"; sourceTree = "<group>"; };
 		1A2941DB3C35962689BDCD75 /* Cubie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cubie.m; sourceTree = "<group>"; };
 		1A2943C74E51B6023A89A1B2 /* CBAccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBAccessToken.m; sourceTree = "<group>"; };
 		1A29459BE56B148184CFE29A /* CBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBService.h; sourceTree = "<group>"; };
@@ -105,6 +110,8 @@
 		2896D888198747C200A8DCCC /* CBPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPref.m; sourceTree = "<group>"; };
 		2896D898198747FA00A8DCCC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		411E805231FD4FB3BBC7462A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AB59543199CA6DD003FB66E /* UIImage+CB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CB.h"; sourceTree = "<group>"; };
+		4AB59544199CA6DD003FB66E /* UIImage+CB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CB.m"; sourceTree = "<group>"; };
 		68C72DD7BE964C418BDAEE16 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,6 +195,8 @@
 				1A29459BE56B148184CFE29A /* CBService.h */,
 				1A294A140BA37E27421AF48D /* CBService.m */,
 				1A294C20F99505345761D6D0 /* error */,
+				1A2941C5053E5CB030D4377B /* UIViewController+CBSession.m */,
+				1A2940022485C63B82BCC29F /* UIViewController+CBSession.h */,
 			);
 			path = sdk;
 			sourceTree = "<group>";
@@ -246,6 +255,8 @@
 		2896D882198747C200A8DCCC /* internal */ = {
 			isa = PBXGroup;
 			children = (
+				4AB59543199CA6DD003FB66E /* UIImage+CB.h */,
+				4AB59544199CA6DD003FB66E /* UIImage+CB.m */,
 				2896D883198747C200A8DCCC /* NSDictionary+CB.h */,
 				2896D884198747C200A8DCCC /* NSDictionary+CB.m */,
 				2896D885198747C200A8DCCC /* NSURL+CB.h */,
@@ -317,6 +328,8 @@
 			mainGroup = 2896D8361987467A00A8DCCC;
 			productRefGroup = 2896D8401987467B00A8DCCC /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+			);
 			projectRoot = "";
 			targets = (
 				2896D83E1987467A00A8DCCC /* sdk */,
@@ -390,8 +403,10 @@
 				1A294B63D41431A010126F64 /* CBSession.m in Sources */,
 				1A29437CBB9EC5E6D8700ECD /* CBAccessToken.m in Sources */,
 				1A294FEB9D07D0F3272A8B8A /* CBService.m in Sources */,
+				4AB59545199CA6DD003FB66E /* UIImage+CB.m in Sources */,
 				1A2943116DFC23F7F316B825 /* CBServiceError.m in Sources */,
 				1A294A4C1F237D507C8AC7AD /* CBMessageIsEmptyError.m in Sources */,
+				1A29408E04FE0D98CB15FBA8 /* UIViewController+CBSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

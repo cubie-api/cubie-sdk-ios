@@ -7,14 +7,20 @@ if len(sys.argv) < 3:
    print os.path.basename(__file__), 'target_path', 'framework_names...'
    sys.exit(1)
 
-FRAMEWORK_PATH = os.path.join(os.path.dirname(__file__), 'derivedDataPath', 'Build', 'framework')
+FRAMEWORK_PATH = os.path.join(os.path.dirname(__file__), 'Frameworks')
 target_path = sys.argv[1]
+
+print 'Patching #import in *.h/*.m from', target_path
 
 header_map = {}
 for framework in sys.argv[2:]:
-   print framework
    for root, dirnames, filenames in os.walk(os.path.join(FRAMEWORK_PATH, framework+'.framework', 'Headers')):
       header_map[framework] = filenames
+
+for framework in header_map.keys():
+   print framework+'.framework'
+   for header in header_map[framework]:
+       print '-', header
 
 for root, dirnames, filenames in os.walk(os.path.join(os.path.dirname(__file__), target_path)):
    for fname in [fname for fname in filenames if fname.endswith('.h') or fname.endswith('.m')]:

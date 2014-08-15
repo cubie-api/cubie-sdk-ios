@@ -14,6 +14,7 @@ static int const IMAGE_HEIGHT = 192;
 @property (nonatomic, copy) NSString* buttonText;
 @property (nonatomic, strong) CBMessageActionParams* linkAction;
 @property (nonatomic, strong) CBMessageActionParams* buttonAction;
+@property (nonatomic, copy) NSString* notification;
 @end
 
 @implementation CBMessageBuilder
@@ -26,6 +27,7 @@ static int const IMAGE_HEIGHT = 192;
                    buttonText:(NSString*) buttonText
                    linkAction:(CBMessageActionParams*) linkAction
                  buttonAction:(CBMessageActionParams*) buttonAction
+                 notification:(NSString*) notification
 {
     self = [super init];
     if (self)
@@ -38,6 +40,7 @@ static int const IMAGE_HEIGHT = 192;
         _buttonText = buttonText;
         _linkAction = linkAction;
         _buttonAction = buttonAction;
+        _notification = notification;
     }
 
     return self;
@@ -53,6 +56,7 @@ static int const IMAGE_HEIGHT = 192;
                            buttonText:nil
                            linkAction:nil
                          buttonAction:nil
+                         notification:nil
     ];
 }
 
@@ -94,6 +98,13 @@ static int const IMAGE_HEIGHT = 192;
     return self;
 }
 
+- (instancetype) notification:(NSString*) notification
+{
+    self.notification = notification;
+    return self;
+}
+
+
 - (CBMessage*) build
 {
     return [CBMessage messageWithText:self.text
@@ -107,7 +118,8 @@ static int const IMAGE_HEIGHT = 192;
                            buttonText:self.buttonText
             buttonAndroidExecuteParam:self.buttonAction ? self.buttonAction.androidExecuteParam : nil
              buttonAndroidMarketParam:self.buttonAction ? self.buttonAction.androidMarketParam : nil
-                buttonIosExecuteParam:self.buttonAction ? self.buttonAction.iosExecuteParam : nil];
+                buttonIosExecuteParam:self.buttonAction ? self.buttonAction.iosExecuteParam : nil
+                         notification:self.notification];
 
 }
 
