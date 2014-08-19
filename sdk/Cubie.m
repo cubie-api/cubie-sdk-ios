@@ -1,4 +1,3 @@
-#import <UIKit/UIKit.h>
 #import "Cubie.h"
 #import "CBPref.h"
 #import "NSURL+CB.h"
@@ -7,18 +6,34 @@
 #import "CBSession.h"
 #import "UIImage+CB.h"
 
+static bool CubieIsStage = NO;
+
 @implementation Cubie
+
++ (bool) isStage
+{
+    return CubieIsStage;
+}
+
++ (void) useStage
+{
+    CubieIsStage = YES;
+}
 
 + (NSURL*) connectUrl
 {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"cubie://connect?appKey=%@&appUniqueDeviceId=%@",
+    NSString* cubieScheme = @"cubie";
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@://connect?appKey=%@&appUniqueDeviceId=%@",
+                                                           cubieScheme,
                                                            [Cubie appKey],
                                                            [Cubie appUniqueDeviceId]]];
 }
 
 + (NSURL*) disconnectUrl:(NSString*) uid
 {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"cubie://disconnect?appKey=%@&appUniqueDeviceId=%@&uid=%@",
+    NSString* cubieScheme = @"cubie";
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@://disconnect?appKey=%@&appUniqueDeviceId=%@&uid=%@",
+                                                           cubieScheme,
                                                            [Cubie appKey],
                                                            [Cubie appUniqueDeviceId],
                                                            uid]];
@@ -42,7 +57,7 @@
 
 + (BOOL) handleOpenUrl:(NSURL*) url sourceApplication:(NSString*) sourceApplication
 {
-    if (![sourceApplication isEqualToString:@"com.liquable.nemo"])
+    if (![sourceApplication isEqualToString:@"com.liquable.nemo"] && ![sourceApplication isEqualToString:@"com.liquable.nemostage"])
     {
         return NO;
     }
@@ -93,8 +108,10 @@
     [connectButton setBackgroundImage:[UIImage stretchableImageWithColor:[UIColor colorWithRed:0.176 green:0.831
                                                                                           blue:0.8 alpha:1]]
                              forState:UIControlStateHighlighted];
+    connectButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 8);
+    connectButton.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [connectButton sizeToFit];
-    connectButton.bounds = CGRectMake(connectButton.bounds.origin.x, connectButton.bounds.origin.y, connectButton.bounds.size.width + 12, connectButton.bounds.size.height + 12);
+    connectButton.bounds = CGRectMake(connectButton.bounds.origin.x, connectButton.bounds.origin.y, connectButton.bounds.size.width + 24, connectButton.bounds.size.height + 12);
     connectButton.layer.masksToBounds = YES;
     connectButton.layer.cornerRadius = 5;
     return connectButton;

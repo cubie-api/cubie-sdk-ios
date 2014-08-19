@@ -106,6 +106,15 @@ static CBSession* currentSession = nil;
 
 - (void) open:(SessionCallback) callback
 {
+    if (![self checkAppKey])
+    {
+        return;
+    }
+    if (![self checkUrlScheme])
+    {
+        return;
+    }
+
     self.callback = callback;
     if ([self isOpen])
     {
@@ -113,8 +122,8 @@ static CBSession* currentSession = nil;
         return;
     }
 
-    DDLogVerbose(@"CBSession open");
     NSURL* connectUrl = [Cubie connectUrl];
+    DDLogVerbose(@"CBSession open:%@", connectUrl);
     if (![[UIApplication sharedApplication] canOpenURL:connectUrl])
     {
         [self askUserToUpdateOrInstallCubie];
@@ -122,6 +131,52 @@ static CBSession* currentSession = nil;
     }
 
     [[UIApplication sharedApplication] openURL:connectUrl];
+}
+
+- (BOOL) checkAppKey
+{
+    if (![Cubie appKey])
+    {
+        [[[UIAlertView alloc] initWithTitle:@"CubieAppKey not defined in Info.plist"
+                                    message:nil
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil]
+                       show];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL) checkUrlScheme
+{
+    NSString* openUrl = [NSString stringWithFormat:@"cubie-%@", [Cubie appKey]];
+    NSArray* urlTypes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+    if (urlTypes)
+    {
+        for (NSDictionary* urlType in urlTypes)
+        {
+            NSArray* urlSchemes = urlType[@"CFBundleURLSchemes"];
+            if (urlSchemes)
+            {
+                for (NSString* urlScheme in urlSchemes)
+                {
+                    if ([urlScheme isEqualToString:openUrl])
+                    {
+                        return YES;
+                    }
+                }
+            }
+        }
+    }
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"url scheme %@ not defined in Info.plist",
+                                                                   openUrl]
+                                message:nil
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil]
+                   show];
+    return NO;
 }
 
 - (void) close:(SessionCallback) callback
@@ -133,8 +188,8 @@ static CBSession* currentSession = nil;
         return;
     }
 
-    DDLogVerbose(@"CBSession close:");
     NSURL* disconnectUrl = [Cubie disconnectUrl:[self getUid]];
+    DDLogVerbose(@"CBSession close:%@", disconnectUrl);
     if (![[UIApplication sharedApplication] canOpenURL:disconnectUrl])
     {
         [self close];

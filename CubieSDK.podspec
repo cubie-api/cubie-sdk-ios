@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
 
    s.name         = 'CubieSDK'
-   s.version      = '0.0.3'
+   s.version      = '0.0.4'
    s.summary      = 'Cubie SDK enables 3rd party apps to connect to Cubie and send messages'
    s.homepage     = 'http://cubie.com'
    s.license      = 'Apache License, Version 2.0'
    s.author       = { 'Cubie' => 'cubie-admin@cubie.com' }
    s.source       = { :git    => 'https://github.com/cubie-api/cubie-sdk-ios.git',
-                      :tag    => 'v0.0.3'}
+                      :tag    => 'v0.0.4'}
    s.requires_arc = true
 
    s.ios.deployment_target = '6.0'

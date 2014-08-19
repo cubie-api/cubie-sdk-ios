@@ -10,6 +10,7 @@
 #import "CBTransactionRequest.h"
 #import "CBServiceError.h"
 #import "CBMessageIsEmptyError.h"
+#import "Cubie.h"
 #import <CocoaLumberjack/DDLog.h>
 
 #ifdef LOG_LEVEL_DEF
@@ -18,11 +19,6 @@
 #define LOG_LEVEL_DEF myLibLogLevel
 static const int myLibLogLevel = LOG_LEVEL_VERBOSE;
 
-#ifdef DEBUG
-static NSString* const EndPoint = @"https://api.cubie.com";
-#else
-static NSString* const EndPoint = @"https://api.cubie.com";
-#endif
 static NSString* const AccessTokenHeaderKey = @"X-CUBIE-ACCESS-TOKEN";
 
 const int CBDefaultFriendListPageSize = 100;
@@ -31,10 +27,15 @@ NSTimeInterval CBRequestTimeoutInterval = 10;
 
 @implementation CBService
 
++ (NSString*) endPoint
+{
+    return @"https://api.cubie.com";
+}
+
 + (void) extendAccessToken:(void (^)(CBUserAccessToken* cubieUserAccessToken, NSError* error)) done
 {
     DDLogVerbose(@"CBService extendAccessToken");
-    NSString* url = [NSString stringWithFormat:@"%@%@", EndPoint, @"/v1/api/user/extend-access-token"];
+    NSString* url = [NSString stringWithFormat:@"%@%@", [CBService endPoint], @"/v1/api/user/extend-access-token"];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request setTimeoutInterval:CBRequestTimeoutInterval];
     [request setHTTPMethod:@"POST"];
@@ -53,7 +54,8 @@ NSTimeInterval CBRequestTimeoutInterval = 10;
 
 + (void) requestMe:(void (^)(CBUser* cubieUser, NSError* error)) done
 {
-    NSString* url = [NSString stringWithFormat:@"%@%@", EndPoint, @"/v1/api/user/me"];
+    NSString* url = [NSString stringWithFormat:@"%@%@", [CBService endPoint], @"/v1/api/user/me"];
+    DDLogVerbose(@"CBService requestMe:%@", url);
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request setTimeoutInterval:CBRequestTimeoutInterval];
     [request addValue:[[CBSession getSession] getAccessToken] forHTTPHeaderField:AccessTokenHeaderKey];
@@ -86,7 +88,7 @@ NSTimeInterval CBRequestTimeoutInterval = 10;
         };
     }
 
-    NSString* url = [NSString stringWithFormat:@"%@%@", EndPoint, @"/v1/api/friend/list"];
+    NSString* url = [NSString stringWithFormat:@"%@%@", [CBService endPoint], @"/v1/api/friend/list"];
     NSMutableURLRequest* request = [[AFJSONRequestSerializer serializer]
                                                              requestWithMethod:@"GET"
                                                                      URLString:url
@@ -124,7 +126,7 @@ NSTimeInterval CBRequestTimeoutInterval = 10;
     CBMssageRequest* cubieMessageRequest = [CBMssageRequest requestWithReceiverUid:receiverUid
                                                                       cubieMessage:cubieMessage];
 
-    NSString* url = [NSString stringWithFormat:@"%@%@", EndPoint, @"/v1/api/chat/app-message"];
+    NSString* url = [NSString stringWithFormat:@"%@%@", [CBService endPoint], @"/v1/api/chat/app-message"];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request setTimeoutInterval:CBRequestTimeoutInterval];
     [request setHTTPMethod:@"POST"];
@@ -157,7 +159,7 @@ NSTimeInterval CBRequestTimeoutInterval = 10;
                                                                     purchaseDate:purchaseDate
                                                                            extra:extra];
 
-    NSString* url = [NSString stringWithFormat:@"%@%@", EndPoint, @"/v1/api/transaction/create"];
+    NSString* url = [NSString stringWithFormat:@"%@%@", [CBService endPoint], @"/v1/api/transaction/create"];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request setTimeoutInterval:CBRequestTimeoutInterval];
     [request setHTTPMethod:@"POST"];
