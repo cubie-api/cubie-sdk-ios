@@ -11,7 +11,7 @@ function build {
 }
 
 function build_simulator {
-   build $1 Debug iphonesimulator
+   build $1 Release iphonesimulator
 }
 
 function build_iphoneos {
@@ -39,7 +39,7 @@ function merge_library {
    echo "merge_library: $1"
    FRAMEWORK_DIR=$FRAMEWORK_BUILD_DIR/$1.framework
    cd $BUILD_DIR
-   lipo -create "Products/Debug-iphonesimulator/$2.a" "Products/Release-iphoneos/$2.a" -o "$FRAMEWORK_DIR/Versions/Current/$1"
+   lipo -create "Products/Release-iphonesimulator/$2.a" "Products/Release-iphoneos/$2.a" -o "$FRAMEWORK_DIR/Versions/Current/$1"
 }
 
 function copy_sdk_headers {

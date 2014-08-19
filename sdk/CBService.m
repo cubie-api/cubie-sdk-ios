@@ -10,8 +10,13 @@
 #import "CBTransactionRequest.h"
 #import "CBServiceError.h"
 #import "CBMessageIsEmptyError.h"
-#import "Cubie.h"
 #import <CocoaLumberjack/DDLog.h>
+
+#ifdef DEBUG
+
+#import "Cubie.h"
+
+#endif
 
 #ifdef LOG_LEVEL_DEF
 #undef LOG_LEVEL_DEF
@@ -29,6 +34,8 @@ NSTimeInterval CBRequestTimeoutInterval = 10;
 
 + (NSString*) endPoint
 {
+#ifdef DEBUG
+#endif
     return @"https://api.cubie.com";
 }
 

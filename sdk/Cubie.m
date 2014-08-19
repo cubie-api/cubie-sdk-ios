@@ -20,20 +20,25 @@ static bool CubieIsStage = NO;
     CubieIsStage = YES;
 }
 
++ (NSString*) scheme
+{
+#ifdef DEBUG
+#endif
+    return @"cubie";
+}
+
 + (NSURL*) connectUrl
 {
-    NSString* cubieScheme = @"cubie";
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@://connect?appKey=%@&appUniqueDeviceId=%@",
-                                                           cubieScheme,
+                                                           [Cubie scheme],
                                                            [Cubie appKey],
                                                            [Cubie appUniqueDeviceId]]];
 }
 
 + (NSURL*) disconnectUrl:(NSString*) uid
 {
-    NSString* cubieScheme = @"cubie";
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@://disconnect?appKey=%@&appUniqueDeviceId=%@&uid=%@",
-                                                           cubieScheme,
+                                                           [Cubie scheme],
                                                            [Cubie appKey],
                                                            [Cubie appUniqueDeviceId],
                                                            uid]];
